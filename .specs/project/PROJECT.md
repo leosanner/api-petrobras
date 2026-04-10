@@ -29,7 +29,7 @@ O fluxo atual de obtencao de dados envolve multiplas etapas manuais (busca em re
 |------------|---------------------|-------------------|
 | Frontend   | React               | Cloudflare Pages  |
 | Backend    | Django (API)        | Render            |
-| Banco      | PostgreSQL 16       | Render PostgreSQL |
+| Banco      | PostgreSQL 16       | Neon              |
 | Pipeline   | Python (ML/Dados)   | Mesmo backend     |
 
 ## Restricoes

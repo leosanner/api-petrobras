@@ -26,7 +26,7 @@ flowchart TD
         L[Processamento Final]
     end
 
-    G[(PostgreSQL<br/>Render)]
+    G[(PostgreSQL<br/>Neon)]
 
     A --> B
     B --> C
@@ -52,7 +52,7 @@ flowchart TD
 |----------|-------------------|------------------|
 | Frontend | React             | Cloudflare Pages |
 | Backend  | Django + DRF      | Render           |
-| Banco    | PostgreSQL 16     | Render           |
+| Banco    | PostgreSQL 16     | Neon             |
 | Pipeline | Python (ML/Dados) | Mesmo backend    |
 
 ## Requisitos

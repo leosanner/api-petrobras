@@ -16,6 +16,7 @@
 | 2026-04-10 | DRF como framework de API REST                                  | Setup F-01, padrao da comunidade Django         |
 | 2026-04-10 | ruff + pytest-django + pre-commit como tooling                  | Setup F-01, qualidade de codigo                 |
 | 2026-04-10 | Deploy no Render (gunicorn + whitenoise)                        | Simplicidade e custo acessivel                  |
+| 2026-04-10 | PostgreSQL hospedado no Neon (em vez de Render PostgreSQL)      | Provedor dedicado para banco de dados           |
 
 ## Blockers
 
