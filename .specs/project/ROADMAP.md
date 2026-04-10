@@ -6,7 +6,7 @@
 
 | ID   | Feature                                    | Tamanho | Status  |
 |------|--------------------------------------------|---------|---------|
-| F-01 | Setup do projeto Django + estrutura modular | Medium  | Pending |
+| F-01 | Setup do projeto Django + estrutura modular | Medium  | Done    |
 | F-02 | Modelagem inicial do dominio (entidades)    | Medium  | Pending |
 | F-03 | Autenticacao e autorizacao (JWT/session)    | Large   | Pending |
 | F-04 | Setup do frontend React + integracao base   | Medium  | Pending |

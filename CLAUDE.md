@@ -3,13 +3,13 @@
 ## Project
 Monitoring and curation platform with data/ML pipeline. Django API backend, React frontend (separate repo), PostgreSQL 16.
 
-## Commands
-- **Start DB**: `docker compose up -d db`
-- **Run server**: `uv run python manage.py runserver`
-- **Run tests**: `uv run pytest`
-- **Run linter**: `uv run ruff check .`
-- **Run formatter**: `uv run ruff format .`
-- **Migrations**: `uv run python manage.py makemigrations && uv run python manage.py migrate`
+## Commands (via Makefile)
+- **First-time setup**: `make setup` (start DB + install deps + migrate)
+- **Dev server**: `make dev` (start DB + runserver)
+- **Run tests**: `make test`
+- **Lint check**: `make lint`
+- **Auto-fix lint/format**: `make format`
+- **Migrations**: `make migrate`
 
 ## Structure
 - `config/` — Django project (settings, urls, wsgi, asgi)
