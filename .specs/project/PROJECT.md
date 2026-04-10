@@ -41,6 +41,7 @@ O fluxo atual de obtencao de dados envolve multiplas etapas manuais (busca em re
 
 ## Principios
 
+- **TDD obrigatorio** — toda funcionalidade nova deve ter testes escritos antes da implementacao. Testes definem o comportamento esperado e guiam o desenvolvimento
 - Componentes pequenos, modulares e de responsabilidade clara
 - Contratos simples entre modulos antes de aprofundar implementacao
 - Evitar acoplamento prematuro a detalhes de infraestrutura

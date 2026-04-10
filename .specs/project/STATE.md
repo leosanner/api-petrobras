@@ -9,6 +9,7 @@
 | 2026-04-10 | Frontend hospedado no Cloudflare Pages                          | Definido no PRD (secao 6.1)                    |
 | 2026-04-10 | Pipeline ML integrado ao backend (mesmo projeto, modulo separado)| PRD prioriza simplicidade arquitetural         |
 | 2026-04-10 | Desenvolvimento incremental em 4 fases                          | Roadmap derivado do PRD (secao 20)             |
+| 2026-04-10 | TDD obrigatorio — testes antes da implementacao                 | Decisao do usuario, principio fundamental      |
 
 ## Blockers
 
