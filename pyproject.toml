@@ -1,7 +1,7 @@
 [project]
 name = "api-petrobras"
 version = "0.1.0"
-description = "Add your description here"
+description = "Plataforma de monitoramento e curadoria com pipeline de dados/ML"
 requires-python = ">=3.12"
 dependencies = [
     "django>=6.0.4",
@@ -20,3 +20,27 @@ dev = [
     "pytest-django>=4.12.0",
     "ruff>=0.15.10",
 ]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+src = ["apps", "config"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "DJ",  # flake8-django
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "config"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.dev"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "-v --tb=short"
