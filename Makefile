@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint format migrate
+.PHONY: setup dev stop test lint format migrate
 
 setup: ## First-time setup: start DB, install deps, run migrations
 	docker compose up -d db
@@ -8,6 +8,10 @@ setup: ## First-time setup: start DB, install deps, run migrations
 dev: ## Start DB and run dev server
 	docker compose up -d db
 	uv run python manage.py runserver
+
+stop: ## Stop dev server and database
+	-pkill -f "manage.py runserver" 2>/dev/null || true
+	docker compose stop db
 
 test: ## Run tests
 	uv run pytest
