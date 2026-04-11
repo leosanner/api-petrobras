@@ -3,6 +3,7 @@
 setup: ## First-time setup: start DB, install deps, run migrations
 	docker compose up -d db
 	uv sync
+	uv run pre-commit install
 	uv run python manage.py migrate
 
 dev: ## Start DB and run dev server
