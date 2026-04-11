@@ -1,34 +1,58 @@
 # Changelog
 
-Registro cronológico das mudanças do projeto, organizado por commit.
-Commits mais recentes aparecem no topo.
+Registro cronológico das mudanças do projeto, agrupado por data.
+Datas mais recentes aparecem no topo.
 
-Formato: `hash curto — tipo: descrição`
+Categorias usadas: **Added** (novo), **Changed** (mudança em algo existente), **Fixed** (correção), **Removed** (removido), **Docs** (documentação), **Chore** (infraestrutura/tooling).
 
 ---
 
 ## 2026-04-11
 
-- `760602e` — **feat(accounts):** F-02 concluído — app `apps.accounts` com `User` customizado (login por email), `EmailVerification` (código de 6 dígitos, 15 min) e admin mínimo; `AUTH_USER_MODEL=accounts.User`; banco dev recriado; 16 testes TDD; migrations excluídas do lint.
-- `c85a2fd` — **docs:** adicionado `CHANGELOG.md` em `.specs/project/` para registrar histórico de commits.
-- `d2a699d` — **chore:** instalação do pre-commit hook integrada ao `make setup`.
-- `b6de187` — **chore:** adicionado logging de console em dev e novo target `make stop`.
+### Added
+- App `apps.accounts` com modelo `User` customizado (login por email, `USERNAME_FIELD = "email"`, username mantido como campo de display)
+- `UserManager` customizado com `create_user` e `create_superuser` baseados em email
+- Modelo `EmailVerification` (código de 6 dígitos, expiração de 15 minutos, método `mark_used` para uso único)
+- Registro mínimo de `User` e `EmailVerification` no Django Admin
+- Migrations iniciais do app `accounts` (`0001_initial`)
+- 16 testes TDD cobrindo `User` e `EmailVerification`
+- Documentação CHANGELOG em `.specs/project/CHANGELOG.md`
+
+### Changed
+- `AUTH_USER_MODEL` definido como `accounts.User` em `config/settings/base.py`
+- `apps.accounts` adicionado a `LOCAL_APPS`
+- Banco de dev recriado do zero para aplicar o novo `AUTH_USER_MODEL`
+- Decisões de F-02 registradas em `STATE.md` (session cookies, login por email, Resend, grupos nativos, self-registration aberta)
+- F-02 movido para `Done` no `ROADMAP.md`
+
+### Chore
+- Pre-commit hook instalado automaticamente pelo `make setup`
+- Logging de console adicionado ao ambiente dev; novo target `make stop`
+- `**/migrations/**` excluído do ruff (arquivos auto-gerados pelo Django)
+
+### Docs
+- Provedor do banco de dados atualizado de Render para Neon
+- Formato do CHANGELOG reescrito no estilo Keep a Changelog (agrupamento por data, sem hashes de commit)
 
 ## 2026-04-10
 
-- `dd86915` — **docs:** provedor do banco de dados atualizado de Render para Neon.
-- `c4ace0c` — **docs:** adicionado README e removido arquivo mermaid standalone.
-- `a4db603` — **feat:** endpoint de system status com health checks de componentes.
-- `db76557` — **docs:** documentação do projeto atualizada após conclusão do F-01.
-- `9eb37db` — **chore:** Makefile com comandos comuns de desenvolvimento.
-- `fcf4010` — **chore:** correções de lint e formatação do ruff.
-- `887ff39` — **chore:** script de build do Render e convenções em `CLAUDE.md`.
-- `d42634c` — **feat:** endpoint de health check implementado via TDD.
-- `6f4dc93` — **chore:** configuração do pre-commit com ruff e hooks padrão.
-- `2495c52` — **chore:** configuração de ruff e pytest-django no `pyproject.toml`.
-- `8755760` — **feat:** Docker Compose para PostgreSQL, `.env` e `.gitignore`.
-- `449a5ec` — **feat:** estrutura inicial do diretório `apps/` com app `core`.
-- `00f25f2` — **refactor:** settings do Django divididos em `base`, `dev` e `prod`.
-- `fbdd26f` — **feat:** projeto Django inicializado com uv e dependências base.
-- `ce88046` — **docs:** TDD registrado como princípio obrigatório do projeto.
-- `20eab94` — **docs:** projeto iniciado com PRD e documentação em `.specs/`.
+### Added
+- Projeto Django inicializado com `uv` e dependências base
+- Settings do Django divididos em `base.py`, `dev.py` e `prod.py`
+- Diretório `apps/` criado com o app `core` (estrutura flat com namespace `apps.*`)
+- Docker Compose para PostgreSQL local, arquivo `.env` e `.gitignore`
+- Endpoint de health check (`/api/health/`) implementado via TDD
+- Endpoint de system status (`/api/status/`) com verificação de componentes
+- Makefile com comandos comuns de desenvolvimento (`setup`, `dev`, `test`, `lint`, `format`, `migrate`)
+- Script `build.sh` para deploy no Render
+- README do projeto
+
+### Chore
+- `pyproject.toml` configurado com ruff e pytest-django
+- Pre-commit configurado com ruff e hooks padrão
+
+### Docs
+- PRD inicial e estrutura `.specs/` criados
+- TDD registrado como princípio obrigatório do projeto
+- Convenções em `CLAUDE.md`
+- Documentação do projeto atualizada após conclusão do F-01
