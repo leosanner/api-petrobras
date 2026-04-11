@@ -9,6 +9,7 @@ Formato: `hash curto — tipo: descrição`
 
 ## 2026-04-11
 
+- `760602e` — **feat(accounts):** F-02 concluído — app `apps.accounts` com `User` customizado (login por email), `EmailVerification` (código de 6 dígitos, 15 min) e admin mínimo; `AUTH_USER_MODEL=accounts.User`; banco dev recriado; 16 testes TDD; migrations excluídas do lint.
 - `c85a2fd` — **docs:** adicionado `CHANGELOG.md` em `.specs/project/` para registrar histórico de commits.
 - `d2a699d` — **chore:** instalação do pre-commit hook integrada ao `make setup`.
 - `b6de187` — **chore:** adicionado logging de console em dev e novo target `make stop`.

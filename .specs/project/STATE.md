@@ -17,6 +17,13 @@
 | 2026-04-10 | ruff + pytest-django + pre-commit como tooling                  | Setup F-01, qualidade de codigo                 |
 | 2026-04-10 | Deploy no Render (gunicorn + whitenoise)                        | Simplicidade e custo acessivel                  |
 | 2026-04-10 | PostgreSQL hospedado no Neon (em vez de Render PostgreSQL)      | Provedor dedicado para banco de dados           |
+| 2026-04-11 | Autenticacao via session cookies (sem JWT)                      | F-02/F-03: base ~500 users, revogacao importa, Django entrega pronto |
+| 2026-04-11 | Login por email + senha (username mantido para display)        | F-02: exige User customizado antes do 1o makemigrations |
+| 2026-04-11 | User customizado via AbstractUser em apps.accounts              | F-02: minima mudanca mantendo permissoes/admin nativos |
+| 2026-04-11 | Papeis/permissoes via Group + Permission nativos do Django      | F-02: escopo atual nao justifica modelo proprio  |
+| 2026-04-11 | Fluxo de ativacao por email: cadastro -> codigo 6 digitos -> ativa | F-02: Opcao B (cadastro tradicional com verificacao) |
+| 2026-04-11 | Resend como provedor de email transacional                      | F-03: simples, API moderna, bom tier gratuito    |
+| 2026-04-11 | Self-registration aberta na v1                                  | F-03: qualquer um pode se cadastrar por enquanto |
 
 ## Blockers
 

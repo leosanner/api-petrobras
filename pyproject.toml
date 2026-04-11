@@ -25,6 +25,7 @@ dev = [
 target-version = "py312"
 line-length = 88
 src = ["apps", "config"]
+extend-exclude = ["**/migrations/**"]
 
 [tool.ruff.lint]
 select = [
