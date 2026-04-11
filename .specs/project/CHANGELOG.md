@@ -9,6 +9,7 @@ Formato: `hash curto — tipo: descrição`
 
 ## 2026-04-11
 
+- `c85a2fd` — **docs:** adicionado `CHANGELOG.md` em `.specs/project/` para registrar histórico de commits.
 - `d2a699d` — **chore:** instalação do pre-commit hook integrada ao `make setup`.
 - `b6de187` — **chore:** adicionado logging de console em dev e novo target `make stop`.
 
