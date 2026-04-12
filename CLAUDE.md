@@ -16,6 +16,7 @@ Monitoring and curation platform with data/ML pipeline. Django API backend, Reac
 - `config/settings/` — Split settings: `base.py`, `dev.py`, `prod.py`
 - `apps/` — Django apps with `apps.` prefix (e.g., `apps.core`)
 - `.specs/` — Project documentation and specs
+- `.specs/features/` — Feature specs (one per feature, F-xx.md)
 
 ## Conventions
 - **TDD mandatory** — write tests before implementation
@@ -25,6 +26,15 @@ Monitoring and curation platform with data/ML pipeline. Django API backend, Reac
 - **Linter/formatter**: ruff (configured in pyproject.toml)
 - **Package manager**: uv (never use pip directly)
 - **Tests**: pytest-django, test files in `apps/<name>/tests/`
+- **Type hints** — all new code must include type annotations:
+  - Function signatures: parameters and return types (e.g., `def foo(bar: str) -> int:`)
+  - Class attributes when not obvious from the assignment
+  - Use `from __future__ import annotations` at the top of each module
+  - Prefer built-in generics (`list[str]`, `dict[str, int]`) over `typing` equivalents
+  - Use `X | None` instead of `Optional[X]`
+  - Django QuerySets: annotate with `QuerySet[Model]` where practical
+  - No need to annotate local variables when the type is obvious from context
+- **Feature specs** — every new feature (F-xx) must have a spec file at `.specs/features/F-xx.md` before implementation begins. See `.specs/features/_TEMPLATE.md` for the required format. This spec serves as the single source of truth for reviewing the feature's implementation.
 
 ## Deploy (Render)
 - **Build command**: `./build.sh`
