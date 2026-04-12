@@ -7,6 +7,14 @@ Categorias usadas: **Added** (novo), **Changed** (mudança em algo existente), *
 
 ---
 
+## 2026-04-12
+
+### Docs
+- Convenção de type hints obrigatórios adicionada ao `CLAUDE.md` (assinaturas, generics nativos, `from __future__ import annotations`)
+- Estrutura `.specs/features/` criada com template (`_TEMPLATE.md`) para specs de features
+- Spec da F-02 preenchido como referência (`F-02.md` — Custom User + Email Verification)
+- Convenção de feature specs registrada no `CLAUDE.md` (spec obrigatório antes de implementar)
+
 ## 2026-04-11
 
 ### Added
