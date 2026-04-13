@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import secrets
 from datetime import timedelta
 
@@ -12,7 +14,13 @@ class UserManager(BaseUserManager):
 
     use_in_migrations = True
 
-    def _create_user(self, email, username, password, **extra_fields):
+    def _create_user(
+        self,
+        email: str,
+        username: str,
+        password: str | None,
+        **extra_fields,
+    ) -> User:
         if not email:
             raise ValueError("Users must have an email address")
         email = self.normalize_email(email)
@@ -21,12 +29,24 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, username, password=None, **extra_fields):
+    def create_user(
+        self,
+        email: str,
+        username: str,
+        password: str | None = None,
+        **extra_fields,
+    ) -> User:
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, username, password, **extra_fields)
 
-    def create_superuser(self, email, username, password=None, **extra_fields):
+    def create_superuser(
+        self,
+        email: str,
+        username: str,
+        password: str | None = None,
+        **extra_fields,
+    ) -> User:
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
@@ -57,28 +77,25 @@ def _generate_code() -> str:
     return f"{secrets.randbelow(1_000_000):06d}"
 
 
-class EmailVerification(models.Model):
-    """Single-use email verification code with expiration."""
+class BaseVerificationCode(models.Model):
+    """Abstract base for single-use verification codes with expiration.
 
-    EXPIRATION_MINUTES = 15
+    Subclasses must define their own ``EXPIRATION_MINUTES`` and a concrete
+    ``user`` ForeignKey (so each subclass gets its own ``related_name``).
+    """
 
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="email_verifications",
-    )
+    EXPIRATION_MINUTES: int = 15
+
     code = models.CharField(max_length=6, default=_generate_code)
     created_at = models.DateTimeField(auto_now_add=True)
     expires_at = models.DateTimeField()
     used_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
+        abstract = True
         ordering = ["-created_at"]
 
-    def __str__(self) -> str:
-        return f"EmailVerification(user={self.user_id}, code={self.code})"
-
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.expires_at:
             self.expires_at = timezone.now() + timedelta(
                 minutes=self.EXPIRATION_MINUTES
@@ -91,3 +108,33 @@ class EmailVerification(models.Model):
     def mark_used(self) -> None:
         self.used_at = timezone.now()
         self.save(update_fields=["used_at"])
+
+
+class EmailVerification(BaseVerificationCode):
+    """Single-use email verification code (15 min expiration)."""
+
+    EXPIRATION_MINUTES = 15
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="email_verifications",
+    )
+
+    def __str__(self) -> str:
+        return f"EmailVerification(user={self.user_id}, code={self.code})"
+
+
+class PasswordResetCode(BaseVerificationCode):
+    """Single-use password reset code (30 min expiration)."""
+
+    EXPIRATION_MINUTES = 30
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="password_reset_codes",
+    )
+
+    def __str__(self) -> str:
+        return f"PasswordResetCode(user={self.user_id}, code={self.code})"
