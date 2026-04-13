@@ -59,6 +59,19 @@ class TestRegisterView:
         mock_send.assert_not_called()
 
     @patch("apps.accounts.views.send_verification_email")
+    def test_register_duplicate_username_400(self, mock_send, api_client):
+        UserFactory(username="taken")
+        data = {
+            "email": "new@example.com",
+            "username": "taken",
+            "password": "strong!Pass1",
+            "password_confirm": "strong!Pass1",
+        }
+        response = api_client.post(self.URL, data)
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        mock_send.assert_not_called()
+
+    @patch("apps.accounts.views.send_verification_email")
     def test_register_password_mismatch_400(self, mock_send, api_client):
         data = {
             "email": "new@example.com",

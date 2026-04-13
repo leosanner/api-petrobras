@@ -63,6 +63,18 @@ class TestRegisterSerializer:
         assert not serializer.is_valid()
         assert "email" in serializer.errors
 
+    def test_duplicate_username(self):
+        UserFactory(username="taken")
+        data = {
+            "email": "new@example.com",
+            "username": "taken",
+            "password": "strong!Pass1",
+            "password_confirm": "strong!Pass1",
+        }
+        serializer = RegisterSerializer(data=data)
+        assert not serializer.is_valid()
+        assert "username" in serializer.errors
+
     def test_missing_fields(self):
         serializer = RegisterSerializer(data={})
         assert not serializer.is_valid()
