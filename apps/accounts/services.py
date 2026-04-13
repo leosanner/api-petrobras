@@ -7,13 +7,8 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-def _configure_resend() -> None:
-    resend.api_key = settings.RESEND_API_KEY
-
-
 def send_verification_email(user: User, code: str) -> None:
     """Send a 6-digit email verification code via Resend."""
-    _configure_resend()
     resend.Emails.send(
         {
             "from": settings.DEFAULT_FROM_EMAIL,
@@ -29,7 +24,6 @@ def send_verification_email(user: User, code: str) -> None:
 
 def send_password_reset_email(user: User, code: str) -> None:
     """Send a 6-digit password reset code via Resend."""
-    _configure_resend()
     resend.Emails.send(
         {
             "from": settings.DEFAULT_FROM_EMAIL,
