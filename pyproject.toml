@@ -5,10 +5,12 @@ description = "Plataforma de monitoramento e curadoria com pipeline de dados/ML"
 requires-python = ">=3.12"
 dependencies = [
     "django>=6.0.4",
+    "django-cors-headers>=4.9.0",
     "django-environ>=0.13.0",
     "djangorestframework>=3.17.1",
     "gunicorn>=25.3.0",
     "psycopg[binary]>=3.3.3",
+    "resend>=2.27.0",
     "whitenoise>=6.12.0",
 ]
 
