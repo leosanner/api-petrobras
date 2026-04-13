@@ -7,6 +7,33 @@ Categorias usadas: **Added** (novo), **Changed** (mudança em algo existente), *
 
 ---
 
+## 2026-04-13
+
+### Added
+- Sistema completo de autenticação via session cookies (F-03)
+- `BaseVerificationCode` (abstract) com Template Method: `is_valid()`, `mark_used()`, `EXPIRATION_MINUTES`
+- `PasswordResetCode` herdando `BaseVerificationCode` (expiração 30 min)
+- `EmailVerification` refatorado para herdar de `BaseVerificationCode`
+- 9 endpoints de autenticação: register, verify-email, login, logout, password-reset, password-reset-confirm, password-change, me, csrf
+- Service layer com envio de email via Resend Python SDK
+- Serializers de validação para todos os fluxos de auth
+- Factories (Factory Boy): `UserFactory`, `EmailVerificationFactory`, `PasswordResetCodeFactory`
+- 60 novos testes TDD (82 total) cobrindo models, serializers, services e views
+- Spec da feature `.specs/features/F-03.md`
+
+### Changed
+- `EmailVerification` refatorado de model standalone para herança de `BaseVerificationCode`
+- `REST_FRAMEWORK` configurado com `SessionAuthentication` como default
+- Settings de session cookies, CSRF e CORS configurados para cross-origin SPA
+- `config/urls.py` inclui rotas `api/auth/` do app accounts
+
+### Chore
+- Dependências adicionadas: `django-cors-headers`, `resend`
+- Migration `0002_passwordresetcode` criada
+- Settings `dev.py` e `prod.py` com overrides de cookies e CORS por ambiente
+
+---
+
 ## 2026-04-12
 
 ### Docs

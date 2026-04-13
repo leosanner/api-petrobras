@@ -8,7 +8,7 @@
 |------|--------------------------------------------|---------|---------|
 | F-01 | Setup do projeto Django + estrutura modular | Medium  | Done    |
 | F-02 | Modelagem inicial do dominio (entidades)    | Medium  | Done    |
-| F-03 | Autenticacao e autorizacao (JWT/session)    | Large   | Pending |
+| F-03 | Autenticacao e autorizacao (JWT/session)    | Large   | Done    |
 | F-04 | Setup do frontend React + integracao base   | Medium  | Pending |
 
 ### Entidades esperadas (fase 1)
@@ -74,7 +74,7 @@
 
 Estas questoes devem ser resolvidas progressivamente durante o desenvolvimento:
 
-- [ ] Estrategia de autenticacao (JWT, session, OAuth?)
+- [x] ~~Estrategia de autenticacao~~ → session cookies (F-03)
 - [ ] Primeira versao permite reexecucao manual do pipeline pelo admin?
 - [ ] Fluxo de aprovacao manual antes da publicacao de novos resultados?
 - [ ] Conjunto minimo de filtros na interface de consulta?

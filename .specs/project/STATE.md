@@ -35,7 +35,7 @@ _Nenhuma licao registrada ainda._
 
 ## Todos
 
-- [ ] Resolver estrategia de autenticacao (JWT vs session vs OAuth)
+- [x] ~~Resolver estrategia de autenticacao~~ → session cookies (F-03 implementada)
 - [ ] Definir se v1 tera reexecucao manual do pipeline
 - [ ] Definir politica de atualizacao de dados (sobrescrita vs versionamento vs incremental)
 - [ ] Definir conjunto minimo de filtros para consulta
