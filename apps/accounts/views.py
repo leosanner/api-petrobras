@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import (
+    authenticate,
+    get_user_model,
+    login,
+    logout,
+    update_session_auth_hash,
+)
 from django.middleware.csrf import get_token
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -181,6 +187,7 @@ class PasswordChangeView(APIView):
 
         request.user.set_password(serializer.validated_data["new_password"])
         request.user.save(update_fields=["password"])
+        update_session_auth_hash(request, request.user)
 
         return Response({"detail": "Password changed successfully."})
 

@@ -275,6 +275,23 @@ class TestPasswordChangeView:
         user.refresh_from_db()
         assert user.check_password("newStrong!1")
 
+    def test_password_change_keeps_current_session(self, api_client):
+        UserFactory(email="change@example.com")
+        api_client.post(
+            "/api/auth/login/",
+            {"email": "change@example.com", "password": "testpass123"},
+        )
+        data = {
+            "current_password": "testpass123",
+            "new_password": "newStrong!1",
+            "new_password_confirm": "newStrong!1",
+        }
+        response = api_client.post(self.URL, data)
+        assert response.status_code == status.HTTP_200_OK
+        # Session should still be valid after password change
+        me_response = api_client.get("/api/auth/me/")
+        assert me_response.status_code == status.HTTP_200_OK
+
     def test_password_change_wrong_current_password_400(self, api_client):
         user = UserFactory()
         api_client.force_authenticate(user=user)
